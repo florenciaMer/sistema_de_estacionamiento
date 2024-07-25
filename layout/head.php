@@ -14,12 +14,14 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo $URL?>/public/templates/admintemplate/dist/css/adminlte.min.css">
 
-<!-- jQuery -->
-<script src="<?php echo $URL?>/public/templates/admintemplate/plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <!--<script src="<?php echo $URL?>/public/templates/admintemplate/plugins/jquery/jquery.min.js"></script>-->
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
 <!-- Datetable -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
 <!-- bootstrap-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">

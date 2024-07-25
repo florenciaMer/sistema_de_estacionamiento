@@ -21,6 +21,9 @@
  
 <div class="container">
 <br>
+<div class="row">
+
+
             <h2 class="m-2">Bienvenido a SIS | Estacionamiento</h2>
     <div class="col-md-12">
           <div class="card card-outline card-primary">
@@ -63,7 +66,7 @@
       </div>         
 </div>
 
-
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -80,10 +83,11 @@
 
 <!-- REQUIRED SCRIPTS -->
 
+<script src="<?php echo $URL?>/public/templates/admintemplate/dist/js/adminlte.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="<?php echo $URL?>/public/templates/admintemplate/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo $URL?>/public/templates/admintemplate/dist/js/adminlte.min.js"></script>
 </body>
 </html>
   

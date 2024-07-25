@@ -1,6 +1,7 @@
 <?php
 include_once('../../config.php');
 $placa = $_GET['placa'];
+$id_map = $_GET['id_map'];
 
 //convierte la variable a mayuscula
 $placa = strtoupper($placa);
@@ -26,30 +27,32 @@ if ($nombre == "") {
    echo "El cliente es nuevo";
    ?>
    <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre:</label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre:<span style="color: red;"><b>*</b></span></label>
         <div class="col-sm-9">
-        <input type="text" class="form-control" id="nombre"value="<?php $nombre;?>" >
+        <input type="text" class="form-control" id="nombre_cliente<?php echo $id_map;?>" value="<?php echo $nombre;?>" >
         </div>
     </div>
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">DNI:</label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">DNI:<span style="color: red;"><b>*</b></span></label>
         <div class="col-sm-9">
-        <input type="text" class="form-control" id="dni" value="<?php $dni;?>">
+        <input type="text" class="form-control" id="dni<?php echo $id_map;?>" value="<?php echo $dni;?>">
+        <input type="text" class="form-control" id="id_cliente<?php echo $id_map;?>" value="<?php echo $id_map;?>" hidden >
         </div>
     </div>
-    <
+    
 <?php 
 }else{?>
    <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre:</label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre:<span style="color: red;"><b>*</b></span></label>
         <div class="col-sm-9">
-        <input type="text" class="form-control" id="nombre"value="<?php echo $nombre;?>" disabled>
+        <input type="text" class="form-control" id="nombre_cliente<?php echo $id_map;?>"value="<?php echo $nombre;?>" disabled>
+        <input type="text" class="form-control" id="id_cliente<?php echo $id_map;?>" value="<?php echo $id_cliente;?>" hidden>
         </div>
     </div>
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">DNI:</label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">DNI:<span style="color: red;"><b>*</b></span></label>
         <div class="col-sm-9">
-        <input type="text" class="form-control" id="dni" value="<?php echo $dni;?>" disabled>
+        <input type="text" class="form-control" id="dni<?php echo $id_map;?>" value="<?php echo $dni;?>" disabled>
         </div>
     </div>
 <?php }

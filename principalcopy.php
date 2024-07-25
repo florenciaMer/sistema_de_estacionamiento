@@ -1,21 +1,21 @@
 <?php
 
 
-include_once('app/config.php');
+
 include_once('layout/head.php');
-//include_once('layout/parte1.php');
-include_once('layout/navbar.php');
-include_once('layout/sidebar.php');
 
 include_once('app/controllers/parqueo/listado_de_parqueo.php');
-//include_once('app/controllers/login/login.php');
+include_once('app/controllers/login/login.php');
 
-
+//$_SESSION['usuario_sesion']= "Florencia";
 if(isset($_SESSION['usuario_sesion'])){
+  //$usuario_sesion = $_SESSION['usuario_sesion'];
+  
 ?>
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -24,12 +24,8 @@ if(isset($_SESSION['usuario_sesion'])){
   <?php 
   include_once('layout/menu.php');
   include_once('app/config.php');
- 
-   
-  //if ($_SESSION['usuario_sesion']) {
-   
-  if(isset($_SESSION['usuario_sesion'])){
-    ?>
+  
+  ?>
    
   </nav>
   <!-- /.navbar -->
@@ -42,13 +38,8 @@ if(isset($_SESSION['usuario_sesion'])){
   <div class="content-wrapper">
     <div class="container">
         <br>
-      <div class="row" style="padding: 50px!important;">
-
-      
-      <h2 class="m-2"> Bienvenido SIS | Estacionamiento</h2>
-     <?php 
-      echo $_SESSION['usuario_sesion'];?>
-
+            <h2 class="m-2">Bienvenido a SIS | Estacionamiento</h2>
+        
     <div class="col-md-12">
           <div class="card card-outline card-primary">
               <div class="card-header">
@@ -86,9 +77,9 @@ if(isset($_SESSION['usuario_sesion'])){
                                 </div>
                                 <div class="modal-body">
                                   <div class="form-group row">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label">Placa:<span style="color: red;"><b>*</b></span></label>
+                                    <label for="staticEmail" class="col-sm-3 col-form-label">Placa:</label>
                                     <div class="col-sm-6">
-                                      <input type="text" style="text-transform: uppercase;" class="form-control" id="placa<?php echo $id_map?>" required>
+                                      <input type="text" style="text-transform: uppercase;" class="form-control" id="placa<?php echo $id_map?>">
                                       <input type="text" style="text-transform: uppercase;" class="form-control" id="id_map<?php echo $id_map?>" value="<?php echo $id_map?>">
                                     </div>
                                     <div class="col-sm-3">
@@ -144,36 +135,6 @@ if(isset($_SESSION['usuario_sesion'])){
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                   <button type="button" class="btn btn-primary" id="btn-imprimir-ticket<?php echo $id_map?>">Imprimir ticket</button>
                                 <script>
-                                  $('#btn-imprimir-ticket<?php echo $id_map?>').click(function(){
-                                    var id_map = $('#id_map<?php echo $id_map?>').val();
-                                    var placa = $('#placa<?php echo $id_map?>').val();
-                                    var nombre_cliente = $('#nombre_cliente<?php echo $id_map?>').val();
-                                    var id_cliente = $('#id_cliente<?php echo $id_map?>').val();
-                                    var dni = $('#dni<?php echo $id_map?>').val();
-                                    var fecha_ingreso = $('#fecha_ingreso<?php echo $id_map?>').val();
-                                    var hora_ingreso = $('#hora_ingreso<?php echo $id_map?>').val();
-                                    var nro_cuviculo = $('#nro_cuviculo<?php echo $id_map?>').val();
-                                    if(placa == ""){
-                                      alert("Ingrese la placa del vehiculo");
-                                      $('#placa<?php echo $id_map?>')
-
-                                    }else if(nombre_cliente == ""){
-                                      alert("Ingrese el nombre del cliente");
-                                      $('#nombre_cliente<?php echo $id_map?>').focus();
-                                    }else if(dni == ""){
-                                      alert("Ingrese el DNI del cliente");
-                                      $('#dni<?php echo $id_map?>').focus();
-                                    }else{
-                                      
-                                    let url = "app/controllers/tickets/registro_tickets.php";
-                                            $.get(url, {id_map:id_map,placa:placa, nombre_cliente:nombre_cliente,
-                                              dni:dni,fecha_ingreso:fecha_ingreso,hora_ingreso:hora_ingreso,
-                                              nro_cuviculo:nro_cuviculo
-                                               }, function(datos){
-                                            $('#respuesta_buscar').html(datos);
-                                            });
-                                    }
-                                  })
                                 
                                 </script>
                                 </div>
@@ -193,13 +154,11 @@ if(isset($_SESSION['usuario_sesion'])){
                   
                     
                   <?php } ?>
-                  <?php } ?>
                   
                 </div>
           </div>
       </div>        
     </div>
-  </div>
   </div>
   <!-- /.content-wrapper -->
 
@@ -215,12 +174,13 @@ if(isset($_SESSION['usuario_sesion'])){
 </html>
 
 <?php
-  //include_once('layout/parte2.php');
-}
-else{
-   echo "Para ingresar a esta plataforma debe iniciar sesion";
+include_once('layout/parte2.php');
+}else{
+    echo "Para ingresar a esta plataforma debe iniciar sesion";
 }
 ?>
 
-
+<script>
+  
+</script>
 

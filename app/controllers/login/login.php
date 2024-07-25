@@ -1,14 +1,14 @@
 <?php
 
-include_once('../../config.php');
-session_start();
+include_once(dirname(__DIR__)."../../config.php");
+
+//include_once('../../config.php');
+//session_start();
 
 $usuario_user = $_GET['usuario_user'];
 $password_user = $_GET['password_user'];
 
-if($usuario_user != ""){
-echo "Sin usuario";
-}
+
 $sql_usuarios = "SELECT * FROM tb_usuarios 
 WHERE email_usuario = '$usuario_user' 
 AND password_usuario = '$password_user'
@@ -27,20 +27,21 @@ foreach ($usuarios as  $usuario) {
     $password_tabla = $usuario['password_usuario'];
    
 }
-if ( ($usuario_user == $email_tabla) && ($password_user == $password_tabla)) {
+if ( $usuario_user == $email_tabla && $password_user == $password_tabla) {
     session_start();
     $_SESSION['usuario_sesion'] = $email_tabla;
-      
-  ?>
-    <div class="alert alert-success" role="alert">
-        Usuario correcto
-    </div>
+     echo "ingresaste";
+   
+    ?>
+  
     <script>
-        location.href= "principal.php";
+        location.href= "<?php echo $URL;?>/principal.php"; 
+        exit();
     </script>
-<?
 
-}else{ ?>
+<?
+} else {   ?>
+
     <div class="alert alert-danger" role="alert">
     Error al introducir sus datos 
     <script>
@@ -48,7 +49,7 @@ if ( ($usuario_user == $email_tabla) && ($password_user == $password_tabla)) {
         $('#password').focus();
 
     </script>
-</div>
+   </div>
 
 <?php }
 ?>
