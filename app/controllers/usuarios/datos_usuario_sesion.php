@@ -5,7 +5,6 @@
 $usuario_sesion = $_SESSION['usuario_sesion'];
 
 
-
 $sql_usuarios = "SELECT * FROM tb_usuarios WHERE email_usuario = '$usuario_sesion' and estado = 1";
                     
 $query_usuarios_sesion = $pdo->prepare($sql_usuarios);

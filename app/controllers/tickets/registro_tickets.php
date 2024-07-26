@@ -2,6 +2,7 @@
 
 include ('../../config.php');
  $id_map = $_GET['id_map'];
+ $placa = $_GET['placa'];
  $nombre_cliente = $_GET['nombre_cliente'];
  $dni = $_GET['dni'];
  $cuviculo = $_GET['nro_cuviculo'];
@@ -14,10 +15,11 @@ include ('../../config.php');
  $user_sesion = $_SESSION['usuario_sesion'];
 
 $sentencia= $pdo->prepare("INSERT INTO tb_tickets 
-( nombre_cliente, dni, cuviculo, fecha_ingreso,  hora_ingreso, user_sesion, fyh_creacion) 
+( nombre_cliente, placa, dni, cuviculo, fecha_ingreso,  hora_ingreso, user_sesion, fyh_creacion) 
 
-VALUES (:nombre_cliente, :dni, :cuviculo,:fecha_ingreso, :hora_ingreso, :user_sesion,:fyh_creacion);");
+VALUES (:nombre_cliente, :placa, :dni, :cuviculo,:fecha_ingreso, :hora_ingreso, :user_sesion,:fyh_creacion);");
 $sentencia->bindParam('nombre_cliente', $nombre_cliente);
+$sentencia->bindParam('placa', $placa);
 $sentencia->bindParam('dni', $dni);
 $sentencia->bindParam('cuviculo', $cuviculo);
 $sentencia->bindParam('fecha_ingreso', $fecha_ingreso);
@@ -33,7 +35,7 @@ if ($sentencia->execute()) {
     
     ?>
     <script>
-        location.href = "<?php echo $URL; ?>/view/roles/asignar.php"
+        location.href = "<?php echo $URL; ?>/view/tickets/generar_ticket.php"
     </script>
     <?php
 
@@ -44,7 +46,7 @@ if ($sentencia->execute()) {
     //header('Location:'.$URL.'/categorias');
     ?>
     <script>
-          location.href = "<?php echo $URL; ?>/view/roles/asignar.php"
+          location.href = "<?php echo $URL; ?>/view/tickets/generar_ticket.php"
     </script>
     <?php
 }

@@ -48,7 +48,7 @@ session_start();
       showConfirmButton: false,
       timer: 1500
    });
-  <?php session_destroy();?>
+  <?php //session_destroy();?>
 
   </script>
     

@@ -15,7 +15,7 @@ include_once('../../app/controllers/roles/listado_roles.php');
   <?php 
   include_once('../../layout/menu.php');
   include_once('../../app/controllers/parqueo/listado_de_parqueo.php');
-  
+
   ?>
 
    
@@ -45,11 +45,12 @@ include_once('../../app/controllers/roles/listado_roles.php');
                     $contador_parqueo++;
                        $id_paqueo = $dato['id_map'];
                        $nro_espacio = $dato['nro_espacio'];
+                       $estado_espacio = $dato['estado_espacio'];
                    
-                  
                        ?>
                        <td><?php echo $contador_parqueo ?></td>
                        <td><?php echo $nro_espacio ?></td>
+                       <td><?php echo $estado_espacio ?></td>
                        <td>
                            <a href="delete.php?id=<?php echo $id_rol;?>" class="btn btn-danger">Borrar</a>
                        </td>

@@ -8,8 +8,8 @@ include_once('layout/navbar.php');
 include_once('layout/sidebar.php');
 
 include_once('app/controllers/parqueo/listado_de_parqueo.php');
+//include_once('app/controllers/tickets/listado_de_tickets.php');
 //include_once('app/controllers/login/login.php');
-
 
 if(isset($_SESSION['usuario_sesion'])){
 ?>
@@ -42,7 +42,7 @@ if(isset($_SESSION['usuario_sesion'])){
   <div class="content-wrapper">
     <div class="container">
         <br>
-      <div class="row" style="padding: 50px!important;">
+      <div class="row p-4">
 
       
       <h2 class="m-2"> Bienvenido SIS | Estacionamiento</h2>
@@ -66,7 +66,7 @@ if(isset($_SESSION['usuario_sesion'])){
                     $nro_espacio = $parqueo['nro_espacio'];
                   
 
-                    if ($parqueo['estado_espacio'] == "libre") {?>
+                    if ($parqueo['estado_espacio'] == "LIBRE") {?>
                     <div class="col"style="text-align: center;">
                       
                     <h2><?php echo $parqueo['nro_espacio']?></h2>
@@ -110,15 +110,19 @@ if(isset($_SESSION['usuario_sesion'])){
                                             $('#placa<?php echo $id_map?>').focus();
                                           }else{
                                           let url = "app/controllers/clientes/buscar_cliente.php";
+                                          
                                             $.get(url, {placa:placa, id_map:id_map}, function(datos){
-                                            $('#respuesta_buscar').html(datos);
+                                            $('#respuesta<?php echo $id_map?>').html(datos);
                                             });
                                           }
                                         })
                                     </script>
                                     </div>
                                   </div>
-                                  <div id="respuesta_buscar">
+                                  <div id="respuesta<?php echo $id_map?>">
+                                    
+                                  </div>
+                                  <div id="respuesta_buscar2">
                                     
                                   </div>
                                   <div class="form-group row">
@@ -165,15 +169,29 @@ if(isset($_SESSION['usuario_sesion'])){
                                       $('#dni<?php echo $id_map?>').focus();
                                     }else{
                                       
-                                    let url = "app/controllers/tickets/registro_tickets.php";
-                                            $.get(url, {id_map:id_map,placa:placa, nombre_cliente:nombre_cliente,
+                                    let url1 = "app/controllers/parqueo/cambiar_estado_ocupado.php";
+                                            $.get(url1, {
+                                              nro_cuviculo:nro_cuviculo
+                                               }, function(datos){
+                                            $('#respuesta_buscar2').html(datos);
+                                            });
+                                    
+                                    let url2 = "app/controllers/clientes/create_cliente.php";
+                                            $.get(url2, {nombre_cliente:nombre_cliente,
+                                              dni:dni,placa:placa
+                                               }, function(datos){
+                                            $('#respuesta_buscar2').html(datos);
+                                            });
+
+                                    let url3 = "app/controllers/tickets/registro_tickets.php";
+                                            $.get(url3, {id_map:id_map,placa:placa, nombre_cliente:nombre_cliente,
                                               dni:dni,fecha_ingreso:fecha_ingreso,hora_ingreso:hora_ingreso,
                                               nro_cuviculo:nro_cuviculo
                                                }, function(datos){
-                                            $('#respuesta_buscar').html(datos);
+                                            $('#respuesta_buscar2').html(datos);
                                             });
-                                    }
-                                  })
+                                          }
+                                          });
                                 
                                 </script>
                                 </div>
@@ -181,12 +199,22 @@ if(isset($_SESSION['usuario_sesion'])){
                           </div>
                         </div> <!--cierre modal-->
                     </div>
+                    <!-- espacio ocupado -->
                     <?php }else{?>
                         <div class="col"style="text-align: center;">
                         <h2 ><?php echo $parqueo['nro_espacio']?></h2>
-                        <button class="btn btn-info">
+                        <button class="btn btn-info" id="btn-ocupado<?php echo $id_map?>" data-toggle="modal" data-target="#btn-ocupado<?php echo $id_map;?>">
                             <img style="text-align: center;" src="<?php echo $URL;?>/public/img/auto1.png" width="50px">
                         </button>
+                        <!-- modal btn ocupado-->
+
+                        
+
+                        <script>
+                          $('#btn-ocupado<?php echo $id_map?>').click(function(){
+                            
+                          })
+                        </script>
                         <p><?php echo $parqueo['estado_espacio']?></p>
                       </div>
                   <?php  }?>
@@ -196,7 +224,9 @@ if(isset($_SESSION['usuario_sesion'])){
                   <?php } ?>
                   
                 </div>
-          </div>
+          </div><!-- Button trigger modal -->
+
+
       </div>        
     </div>
   </div>

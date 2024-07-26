@@ -41,20 +41,22 @@ if ($nombre == "") {
     </div>
     
 <?php 
-}else{?>
+}else{
+echo "el cliente ya existe"?>
    <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre:<span style="color: red;"><b>*</b></span></label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre:</label>
         <div class="col-sm-9">
         <input type="text" class="form-control" id="nombre_cliente<?php echo $id_map;?>"value="<?php echo $nombre;?>" disabled>
         <input type="text" class="form-control" id="id_cliente<?php echo $id_map;?>" value="<?php echo $id_cliente;?>" hidden>
         </div>
     </div>
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label">DNI:<span style="color: red;"><b>*</b></span></label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">DNI:</label>
         <div class="col-sm-9">
         <input type="text" class="form-control" id="dni<?php echo $id_map;?>" value="<?php echo $dni;?>" disabled>
         </div>
     </div>
 <?php }
+
 
 ?>
