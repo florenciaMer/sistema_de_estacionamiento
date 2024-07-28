@@ -35,7 +35,7 @@
 <body class="hold-transition sidebar-mini">
 <?php
 
-session_start();
+
   if (isset($_SESSION['mensaje'])) {
     $respuesta = $_SESSION['mensaje'];
     $icon = $_SESSION['icono'];
@@ -48,7 +48,7 @@ session_start();
       showConfirmButton: false,
       timer: 1500
    });
-  <?php //session_destroy();?>
+  <?php session_destroy();?>
 
   </script>
     

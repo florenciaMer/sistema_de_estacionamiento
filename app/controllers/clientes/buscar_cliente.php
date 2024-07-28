@@ -59,4 +59,33 @@ echo "el cliente ya existe"?>
 <?php }
 
 
+//busca la placa en tb_tickets
+
+$query_ticket = "SELECT * FROM tb_tickets WHERE  placa ='$placa' AND estado_ticket ='OCUPADO' and estado = '1'";
+                    
+$query_datos_tickets = $pdo->prepare($query_ticket);
+$query_datos_tickets->execute();
+$datos_tickets = $query_datos_tickets->fetchAll(PDO::FETCH_ASSOC);
+$contador_ticket = 0;
+foreach ($datos_tickets as $key => $value) {
+    $contador_ticket = $contador_ticket+1;
+}
+
+if($contador_ticket == 0) {
+   echo "No se ha encontrado ningun cliente";
+   ?>
+    <script>
+        $('#btn-imprimir-ticket<?php echo $id_map?>').removeAttr('disabled');
+    </script>
+   <?php
+}else{
+   
+    ?>
+    <div class="alert alert-danger">
+        Este vehiculo ya se encuentra dentro del parqueo
+    </div>
+    <script>
+        $('#btn-imprimir-ticket<?php echo $id_map?>').attr('disabled', 'disabled');
+    </script>
+<?php }
 ?>

@@ -1,8 +1,13 @@
 <?php
 
 
-
-$usuario_sesion = $_SESSION['usuario_sesion'];
+if (isset($_SESSION['usuario_sesion'])) {
+   # code...
+   $usuario_sesion = $_SESSION['usuario_sesion'];
+}else{
+   $_SESSION['usuario_sesion'] = 'florencia mer';
+   $usuario_sesion = $_SESSION['usuario_sesion'];
+}
 
 
 $sql_usuarios = "SELECT * FROM tb_usuarios WHERE email_usuario = '$usuario_sesion' and estado = 1";

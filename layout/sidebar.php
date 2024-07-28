@@ -4,7 +4,9 @@ include_once('head.php');
 
 //include($URL. "/app/controllers/usuarios/datos_usuario_sesion.php");
 
+session_start();
 include_once(dirname(__DIR__)."/app/controllers/usuarios/datos_usuario_sesion.php");
+
 ?>
 
 
@@ -23,6 +25,7 @@ include_once(dirname(__DIR__)."/app/controllers/usuarios/datos_usuario_sesion.ph
                 <div><i class="fa fa-regular fa-user text-white"></i></div>
             </div>
             <div class="info">
+               
                 <a href="<?php echo $URL?>/principal.php" class="d-block"><?php echo $email_usuario_sesion;?></a>
             </div>
         </div>
