@@ -8,8 +8,15 @@ include_once('layout/navbar.php');
 include_once('layout/sidebar.php');
 
 include_once('app/controllers/parqueo/listado_de_parqueo.php');
+include_once('app/controllers/configuraciones/listado_de_informacion.php');
 //include_once('app/controllers/tickets/listado_de_tickets.php');
 //include_once('app/controllers/login/login.php');
+
+//recuperar el id de la informacion
+foreach ($informacion_datos as $info) {
+  $id_informacion = $info['id_inf'];
+  # code...
+}
 
 if(isset($_SESSION['usuario_sesion'])){
 ?>
@@ -64,9 +71,10 @@ if(isset($_SESSION['usuario_sesion'])){
                   <?php foreach ($parqueo_datos as $parqueo) {
                     $id_map = $parqueo['id_map'];
                     $nro_espacio = $parqueo['nro_espacio'];
+                   ;
                   
 
-                    if ($parqueo['estado_espacio'] == "LIBRE") {?>
+                    if ($parqueo['estado_espacio'] == "libre")  {?>
                     <div class="col"style="text-align: center;">
                       
                     <h2><?php echo $parqueo['nro_espacio']?></h2>
@@ -88,8 +96,8 @@ if(isset($_SESSION['usuario_sesion'])){
                                   <div class="form-group row">
                                     <label for="staticEmail" class="col-sm-3 col-form-label">Placa:<span style="color: red;"><b>*</b></span></label>
                                     <div class="col-sm-6">
-                                      <input type="text" style="text-transform: uppercase;" class="form-control" id="placa<?php echo $id_map?>" required>
-                                      <input type="text" style="text-transform: uppercase;" class="form-control" id="id_map<?php echo $id_map?>" value="<?php echo $id_map?>">
+                                      <input type="text" style="text-transform: uppercase;" class="form-control" id="placa<?php echo $id_map?>" require>
+                                      <input type="text" style="text-transform: uppercase;" class="form-control" id="id_map<?php echo $id_map?>" value="<?php echo $id_map?>" hidden>
                                     </div>
                                     <div class="col-sm-3">
                                     
@@ -200,8 +208,10 @@ if(isset($_SESSION['usuario_sesion'])){
                         </div> <!--cierre modal-->
                     </div>
                     <!-- espacio OCUPADO -->
-                    <?php }else{?>
+                    <?php }else{
                       
+                    
+                    ?>
                         <div class="col"style="text-align: center;">
                         <h2 ><?php echo $parqueo['nro_espacio']?></h2>
                         
@@ -209,11 +219,10 @@ if(isset($_SESSION['usuario_sesion'])){
                     data-target="#modal<?php echo $id_map?>">
                         <img src="<?php echo $URL;?>/public/img/auto1.png" width="60px" alt="">
                     </button>
-                     
+                     OCUPADO
                     <?php
 
-
-                    $query_datos_cliente = $pdo->prepare("SELECT * FROM tb_tickets WHERE cuviculo = '$nro_espacio' AND estado_ticket = '1' ");
+                    $query_datos_cliente = $pdo->prepare("SELECT * FROM tb_tickets WHERE cuviculo = '$nro_espacio' AND estado = '1' ");
                     $query_datos_cliente->execute();
                     $datos_clientes = $query_datos_cliente->fetchAll(PDO::FETCH_ASSOC);
                     
@@ -287,7 +296,13 @@ if(isset($_SESSION['usuario_sesion'])){
                                 
                                   <a href="<?php echo $URL?>/app/controllers/tickets/cancelar_ticket.php?id=<?php echo $id_ticket;?>&&cuviculo=<?php echo $cuviculo?>" class="btn btn-danger">Cancelar</a>
                                   <a href="<?php echo $URL?>/view/tickets/reimprimir_ticket.php?id=<?php echo $id_ticket;?>" class="btn btn-primary" id="btn-imprimir-ticket<?php echo $id_map?>">Volver a Imprimir</a>
-                                  <button type="button" class="btn btn-success" id="btn-imprimir-ticket<?php echo $id_map?>">Facturar</button>
+                                  <button type="button" class="btn btn-success"  id="btn-facturar<?php echo $id_map?>">Facturar</button>
+                              <script>
+                                $('#btn-facturar<?php echo $id_map?>').click(function(){
+                                  var id_informacion = "<?php echo $id_informacion;?>";
+                                  
+                                })
+                              </script>
                               </div>
                               </div><!-- cierre modal dialogo-->
                             </div>
