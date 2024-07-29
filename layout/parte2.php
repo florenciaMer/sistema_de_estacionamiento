@@ -36,7 +36,7 @@
                   </div>
               </div>
 
-              <div class="card-body" style="display: block; background-image:url('../public/img/piso.jpg')">
+              <div class="card-body" style="display: block; background-image:url('<?php echo $URL;?>/public/img/piso.jpg')">
                 <div class="row">
                   <?php foreach ($parqueo_datos as $auto) {
                     if ($auto['estado_espacio'] == "libre") {?>
