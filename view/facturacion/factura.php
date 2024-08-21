@@ -5,6 +5,7 @@ require_once('../../public/templates/TCPDF-main/tcpdf.php');
 include_once('../../app/config.php');
 include_once('../../app/controllers/configuraciones/listado_de_informacion.php');
 include_once('../../app/controllers/tickets/listado_de_tickets.php');
+
 //carga del encabezado
 foreach ($informacion_datos as $info) {
   $id_parqueo = $info['id_inf'];
@@ -30,6 +31,40 @@ foreach ($tickets_datos as $ticket) {
     $user_sesion = $_SESSION['usuario_sesion'];
 
 }
+
+//cargar la informacion de la factura
+
+$sql_factura = "SELECT * FROM tb_facturaciones where estado = '1'";
+
+$query_facturas = $pdo->prepare($sql_factura);
+$query_facturas->execute();
+$factura_datos = $query_facturas->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($factura_datos as $factura) {
+    $id_facturacion = $factura['id_facturacion'];
+    $id_informacion = $factura['id_informacion'];
+    $nro_factura = $factura['nro_factura'];
+    $id_cliente = $factura['id_cliente'];
+    $estado = $factura['estado'];
+    $fecha_factura = $factura['fecha_factura'];
+    $fecha_ingreso = $factura['fecha_ingreso'];
+    $hora_ingreso = $factura['hora_ingreso'];
+    $fecha_salida = $factura['fecha_salida'];
+    $hora_salida = $factura['hora_salida'];
+    $tiempo = $factura['tiempo'];
+    $cuviculo = $factura['cuviculo'];
+    $detalle = $factura['detalle'];
+    $precio = $factura['precio'];
+    $cantidad = $factura['cantidad'];
+    $total = $factura['total'];
+    $monton_total = $factura['monton_total'];
+    $monton_literal = $factura['monton_literal'];
+    $user_sesion = $factura['user_sesion'];
+    $qr = $factura['qr'];
+   
+
+}
+
 
 
 // create new PDF document
@@ -73,7 +108,7 @@ $pdf->setFont('Helvetica',  5);
 $pdf->AddPage();
 
 
-$html = '<h1>HTML Example</h1>
+$html = '<h1>HTML FACTURA</h1>
 <div>
     <p style="text-align:center;">'.$nombre_parqueo.'<br>
     '.$actividad_empresa.' <br>
@@ -92,9 +127,9 @@ $html = '<h1>HTML Example</h1>
         <b>DNI:</b> '.$dni.' <br>
       -----------------------------------------<br>
       <div>
-        <b>Desde: </b> 11/10/2024  hora: 18:00<br>
-        <b>Hasta: </b> 11/10/2024  hora: 21:00<br>
-        <b>Tiempo:</b>3 horas <br>
+        <b>Desde: </b> '.$fecha_ingreso.'  hora: '.$hora_ingreso.'<br>
+        <b>Hasta: </b> '.$fecha_salida.'  hora: '.$hora_salida.'<br>
+       <b>Valor de la factura:</b> $'.$monton_literal.'<br>
      -----------------------------------------<br>
      <table border="1" cellpadding="2px">
         <tr style="text-align: center">
@@ -104,14 +139,14 @@ $html = '<h1>HTML Example</h1>
             <td width="100px">Total</td>
         </tr>
         <tr>
-            <td style="text-align: center">Servicio de parqueo de 2 horas en el cuviculo 10</td>
-            <td style="text-align: center">2</td>
-            <td style="text-align: center">$5000</td>
-            <td style="text-align: center">$10000</td>
+            <td style="text-align: center">'.$detalle.'</td>
+            <td style="text-align: center">'.$cantidad.'</td>
+            <td style="text-align: center">'.$precio.'</td>
+            <td style="text-align: center">'.$monton_total.'</td>
         </tr>
      </table>
-     <p style="text-align:right"><b>Monto total</b> $10000</p></br>
-     <p><b>Son: </b> Diez mil Pesos argentinos</p>
+     <p style="text-align:right"><b>Monto total</b>'.$monton_total.'</p></br>
+     <p><b>Son: </b> '.$monton_literal.'</p>
      -----------------------------------------<br>
      <b>Usuario: </b> '.$user_sesion.'
      -----------------------------------------<br>

@@ -30,7 +30,8 @@ $dia = date('d');
 $mes = date('m');
 $anio = date('Y');
 $hora = date('H');
-$minutos = date('i')
+$minutos = date('i');
 
+$estado_del_registro = "1";
 
 ?>
